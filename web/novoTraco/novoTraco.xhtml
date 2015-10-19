@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Novo Traco</title>
+        <style type="text/css">
+            .ui-widget,.ui-widget .ui-widget {
+                font-size: 90% !important;
+            }
+        </style>
+    </h:head>
+    <h:body>
+
+
+        <h:form>
+            <p:dataTable  id="tableAgregados" var="agr" value="#{novoTracoBean.modelTracoAgregado}" emptyMessage="" style="width: 50%; text-align: center">
+                <p:column headerText="Tipo">
+                    <f:facet name="header">
+                        <p:selectOneMenu id="dropAgregados" value="#{novoTracoBean.selectedAgregado}" style="width:150px">
+                        <f:selectItems value="#{novoTracoBean.listaAgregado}" var ="agr" itemValue="#{agr.agregadoTipoId.id}" itemLabel="#{agr.agregadoTipoId.tipo}"/>
+                    </p:selectOneMenu>
+                    </f:facet>
+                    <h:outputText value="#{agr.agregado.agregadoTipoId.tipo}"/>
+                </p:column>
+                <p:column headerText="Quantidade">
+                    <f:facet name="header">
+                        <p:inputText value="#{novoTracoBean.quantidade}" />
+                    </f:facet>
+                    <h:outputText value="#{agr.quantidade}" />
+                </p:column>
+                <p:column headerText="Ação" style="width:50px">
+                    <f:facet name="header">
+                        <p:commandButton value="+" update="tableAgregados" actionListener="#{novoTracoBean.addAgregado()}"  />
+                    </f:facet>
+                    <p:commandButton value="-" update="tableAgregados" actionListener="#{novoTracoBean.delAgregado()}"/>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+
+    </h:body>
+</html>
+
